@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>x1fitness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Oswald', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                red: '#E60000', // Bright aggressive red
+                dark: '#050505', // Deep black
+                tint: '#1a0505', // Subtle red tint background
+              }
+            },
+            animation: {
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'marquee-left': 'marqueeLeft 60s linear infinite',
+              'marquee-right': 'marqueeRight 60s linear infinite',
+              'marquee-infinite': 'marqueeInfinite 30s linear infinite',
+              'sheen': 'sheen 1s ease-in-out',
+            },
+            keyframes: {
+              marqueeLeft: {
+                '0%': { transform: 'translate3d(0, 0, 0)' },
+                '100%': { transform: 'translate3d(-50%, 0, 0)' },
+              },
+              marqueeRight: {
+                '0%': { transform: 'translate3d(-50%, 0, 0)' },
+                '100%': { transform: 'translate3d(0, 0, 0)' },
+              },
+              marqueeInfinite: {
+                '0%': { transform: 'translate3d(0, 0, 0)' },
+                '100%': { transform: 'translate3d(-100%, 0, 0)' },
+              },
+              sheen: {
+                '0%': { transform: 'translateX(-150%) skewX(-20deg)' },
+                '100%': { transform: 'translateX(150%) skewX(-20deg)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* GPU Acceleration Utilities to Reduce Lag */
+      .gpu-accelerated {
+        transform: translateZ(0);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+      }
+      
+      /* Layout Isolation for Performance */
+      .isolate-layout {
+        contain: layout paint style;
+      }
+      
+      /* Text Styles */
+      .text-outline {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+        color: transparent;
+      }
+      .text-outline-red {
+        -webkit-text-stroke: 1px rgba(230, 0, 0, 0.5);
+        color: transparent;
+      }
+      
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      body {
+        cursor: none;
+        background-color: #050505;
+        overflow-x: hidden;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0?dev",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0?dev",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react,react-dom",
+    "framer-motion": "https://esm.sh/framer-motion@10.16.4?external=react,react-dom"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-black text-white antialiased overflow-x-hidden selection:bg-brand-red selection:text-white">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
