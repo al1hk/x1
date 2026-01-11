@@ -4,7 +4,7 @@ import Link from './Link';
 
 const ContactFooter: React.FC = () => {
   return (
-    <footer className="w-full bg-[#050505] pt-20 relative overflow-hidden">
+    <footer id="contact" className="w-full bg-[#050505] pt-20 relative overflow-hidden">
         
       {/* Consistent Background Tint */}
       <div className="absolute inset-0 bg-gradient-to-t from-brand-tint via-[#050505] to-[#050505] opacity-100 pointer-events-none"></div>

@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section ref={ref} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end md:justify-center bg-brand-dark contain-paint">
+    <section id="home" ref={ref} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end md:justify-center bg-brand-dark contain-paint">
       
       {/* 1. Background Marquee - Optimized & More Visible */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-30 select-none overflow-hidden">
@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Left */}
-        <div className="absolute bottom-[15%] left-[5%] md:left-[15%] lg:left-[20%] animate-float-delayed will-change-transform">
+        <div className="absolute bottom-[25%] md:bottom-[15%] left-[5%] md:left-[15%] lg:left-[20%] animate-float-delayed will-change-transform">
             <FloatingCard 
                 icon={<Flame className="w-5 h-5" />} 
                 label="Avg Burn" 
@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Right */}
-        <div className="absolute bottom-[15%] right-[5%] md:right-[15%] lg:right-[20%] animate-float-slow will-change-transform">
+        <div className="absolute bottom-[25%] md:bottom-[15%] right-[5%] md:right-[15%] lg:right-[20%] animate-float-slow will-change-transform">
             <FloatingCard 
                 icon={<Dumbbell className="w-5 h-5" />} 
                 label="Facility" 

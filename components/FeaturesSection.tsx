@@ -13,7 +13,7 @@ const features = [
 
 const FeaturesSection: React.FC = () => {
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[#050505] overflow-hidden">
+    <section id="about" className="relative w-full py-24 md:py-32 bg-[#050505] overflow-hidden">
       
       {/* --- BACKGROUND EFFECTS START --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
