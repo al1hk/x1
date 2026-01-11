@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ContactFooter from '../ContactFooter';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, ArrowRight, MessageCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,24 +18,45 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
 
-    // Simulate network delay
-    setTimeout(() => {
-        const mailSubject = `Inquiry: ${formData.subject} from ${formData.name}`;
-        const body = `Name: ${formData.name}\nEmail: ${formData.email}\nInterest: ${formData.subject}\n\nMessage:\n${formData.message}`;
-        
-        window.location.href = `mailto:x1fitness@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
-        
-        setStatus('success');
-        
-        setTimeout(() => {
+    try {
+        // Use FormSubmit.co AJAX endpoint to send email without a backend
+        const response = await fetch("https://formsubmit.co/ajax/hello@x1fitness.com", {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                email: formData.email,
+                subject: formData.subject,
+                message: formData.message,
+                _template: "table", // Makes the email look cleaner
+                _subject: `New Inquiry: ${formData.subject}` // Custom subject line
+            })
+        });
+
+        if (response.ok) {
+            setStatus('success');
+            // Clear form after delay
+            setTimeout(() => {
+                setStatus('idle');
+                setFormData({ name: '', email: '', subject: 'Membership Inquiry', message: '' });
+            }, 5000);
+        } else {
+            console.error("Submission failed");
+            alert("Something went wrong. Please try again.");
             setStatus('idle');
-            setFormData({ name: '', email: '', subject: 'Membership Inquiry', message: '' });
-        }, 3000);
-    }, 1500);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Network error. Please check your connection.");
+        setStatus('idle');
+    }
   };
 
   return (
@@ -95,9 +116,9 @@ const Contact: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
                         {[
-                            { icon: MapPin, label: "Location", val: "8008 Wilshire Blvd\nLos Angeles, CA 90210" },
-                            { icon: Phone, label: "Phone", val: "+1 (555) 012-3456" },
-                            { icon: Mail, label: "Email", val: "x1fitness@gmail.com" },
+                            { icon: MapPin, label: "Location", val: "First Floor, KJS Business Complex, Block 10-A, Gulshan e Iqbal, Main Rashid minhas road, Karachi." },
+                            { icon: Phone, label: "Phone", val: "+92 310 6568333" },
+                            { icon: Mail, label: "Email", val: "hello@x1fitness.com" },
                             { icon: Clock, label: "Hours", val: "Mon-Sun: 5am - 11pm" },
                         ].map((item, i) => (
                             <div key={i} className="group">
@@ -111,6 +132,26 @@ const Contact: React.FC = () => {
                             </div>
                         ))}
                     </div>
+
+                    {/* WhatsApp CTA - Special Addition */}
+                    <a 
+                        href="https://wa.me/923106568333"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-4 p-5 border border-[#25D366]/30 bg-[#25D366]/5 hover:bg-[#25D366]/10 hover:border-[#25D366] transition-all duration-300 rounded-sm cursor-pointer relative overflow-hidden"
+                    >
+                         {/* Hover Glare */}
+                        <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-[#25D366]/10 to-transparent rotate-45 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none" />
+
+                        <div className="w-12 h-12 flex items-center justify-center bg-[#25D366] rounded-full text-white shadow-[0_0_20px_rgba(37,211,102,0.3)] group-hover:scale-110 transition-transform z-10">
+                            <MessageCircle className="w-6 h-6" />
+                        </div>
+                        <div className="z-10">
+                            <span className="block text-[#25D366] font-bold uppercase tracking-widest text-xs mb-1">Instant Support</span>
+                            <span className="text-white font-display text-xl md:text-2xl tracking-wide group-hover:text-[#25D366] transition-colors">+92 310 6568333</span>
+                        </div>
+                        <ArrowRight className="w-6 h-6 text-[#25D366] ml-auto opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 z-10" />
+                    </a>
                 </div>
 
                 {/* Right: Modern Form */}

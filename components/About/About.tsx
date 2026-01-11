@@ -47,14 +47,20 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8 order-2 lg:order-1">
                 <h2 className="text-4xl md:text-6xl font-display font-bold text-white uppercase leading-[0.9]">
-                    We Are The <br/><span className="text-brand-red">Anti-Average</span>
+                    Built From <br/><span className="text-brand-red">The Heart</span>
                 </h2>
                 <div className="space-y-6 text-gray-400 font-medium leading-relaxed text-lg border-l-2 border-brand-red/50 pl-6">
                     <p>
-                        X1Fitness wasn't born in a boardroom. It was forged in the sweat of underground garages and the grit of 4AM wake-up calls. We rejected the sterilized, corporate gym culture to build something raw, real, and relentless.
+                        We built X1 Fitness with love, passion, and a deep commitment to give our community something truly special. From day one, our vision has been to create a fitness space that is one of a kind — a place where modern equipment, professional guidance, and an inspiring atmosphere come together to help every member become the best version of themselves.
                     </p>
                     <p>
-                        Our mission is simple: To provide the ultimate battleground for physical and mental reconstruction. We don't just train bodies; we re-engineer mindsets. When you step through our doors, you leave excuses behind.
+                        X1 Fitness stands out because we use premium and latest equipment to enhance the entire workout experience, from tracking progress to optimizing training routines. We also offer separate timings for women, ensuring comfort, privacy, and a supportive environment. Our team includes certified male and female trainers for men and women, so every member gets the guidance they deserve.
+                    </p>
+                    <p>
+                        The facility features modern cardio, well-maintained and premium machines, and a vibrant, motivating atmosphere that boosts energy the moment you walk through the door. Everything here — the lighting, the layout, the music, the environment — has been designed to make members feel inspired and confident.
+                    </p>
+                    <p>
+                        For us, X1 Fitness is more than a gym. It’s a community-driven space built from the heart, where every detail reflects our dedication to help society live healthier, stronger, and happier lives. We’re truly grateful to everyone who chooses to be part of the X1 family.
                     </p>
                 </div>
                 
@@ -70,7 +76,7 @@ const About: React.FC = () => {
                     </div>
                     <div>
                         <span className="block text-4xl font-display font-bold text-white">100%</span>
-                        <span className="text-xs uppercase tracking-widest text-brand-red font-bold">Grit</span>
+                        <span className="text-xs uppercase tracking-widest text-brand-red font-bold">Heart</span>
                     </div>
                 </div>
             </div>
@@ -97,14 +103,14 @@ const About: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
                 <span className="text-brand-red font-bold tracking-[0.2em] uppercase text-sm">The Code</span>
-                <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase mt-2">Core Directives</h2>
+                <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase mt-2">Core Values</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                    { icon: Target, title: "Precision", desc: "We don't guess. We measure. Every rep, every macro, every second is calculated for maximum return." },
-                    { icon: Shield, title: "Resilience", desc: "Pain is a signal, not a stop sign. We teach you to embrace discomfort as the catalyst for growth." },
-                    { icon: Users, title: "Brotherhood", desc: "You enter alone, but you train as a unit. The collective energy of X1 drives individual excellence." }
+                    { icon: Target, title: "Precision", desc: "We provide modern equipment and data-driven tracking to optimize your fitness journey with absolute accuracy." },
+                    { icon: Shield, title: "Support", desc: "A supportive environment with separate timings for women, ensuring privacy, comfort, and confidence for all." },
+                    { icon: Users, title: "Community", desc: "More than a gym, we are a family. We grow stronger together, fostering a culture of encouragement and respect." }
                 ].map((item, i) => (
                     <div key={i} className="group bg-[#0a0a0a]/90 backdrop-blur-md border border-white/5 p-10 hover:border-brand-red/50 transition-all duration-500 relative overflow-hidden rounded-sm hover:-translate-y-2">
                         {/* Giant Icon Background */}
@@ -134,7 +140,7 @@ const About: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
                     <span className="text-brand-red font-bold tracking-[0.2em] uppercase text-sm">Leadership</span>
-                    <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase">Command <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>Squad</span></h2>
+                    <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase">Expert <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>Trainers</span></h2>
                 </div>
                 <div className="h-[1px] flex-1 bg-white/10 hidden md:block mb-4 mx-8"></div>
                 <button className="text-white uppercase font-bold tracking-widest text-sm hover:text-brand-red transition-colors">View All Coaches &rarr;</button>

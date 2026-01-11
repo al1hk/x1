@@ -1,10 +1,9 @@
 import React from 'react';
 import { Dumbbell, Facebook, Linkedin, Instagram, Twitter } from 'lucide-react';
-import Link from './Link';
 
 const ContactFooter: React.FC = () => {
   return (
-    <footer id="contact" className="w-full bg-[#050505] pt-20 relative overflow-hidden">
+    <footer className="w-full bg-[#050505] pt-20 relative overflow-hidden">
         
       {/* Consistent Background Tint */}
       <div className="absolute inset-0 bg-gradient-to-t from-brand-tint via-[#050505] to-[#050505] opacity-100 pointer-events-none"></div>
@@ -78,9 +77,9 @@ const ContactFooter: React.FC = () => {
                 {/* Social Icons */}
                 <div className="flex gap-6 mb-8">
                     {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-                        <Link key={i} href="#" className="bg-white text-black p-3 rounded-lg hover:bg-brand-red hover:text-white transition-all duration-300 hover:-translate-y-1">
+                        <a key={i} href="#" className="bg-white text-black p-3 rounded-lg hover:bg-brand-red hover:text-white transition-all duration-300 hover:-translate-y-1">
                             <Icon className="w-6 h-6" />
-                        </Link>
+                        </a>
                     ))}
                 </div>
 
@@ -88,9 +87,9 @@ const ContactFooter: React.FC = () => {
                 <ul className="flex flex-wrap justify-center gap-6 md:gap-8">
                     {['Home', 'About', 'Features', 'Service', 'Exercise'].map((link) => (
                         <li key={link}>
-                            <Link href={`#${link.toLowerCase()}`} className="text-gray-400 hover:text-brand-red text-sm font-bold uppercase tracking-wider transition-colors">
+                            <a href={`#${link.toLowerCase()}`} className="text-gray-400 hover:text-brand-red text-sm font-bold uppercase tracking-wider transition-colors">
                                 {link}
-                            </Link>
+                            </a>
                         </li>
                     ))}
                 </ul>
@@ -108,9 +107,9 @@ const ContactFooter: React.FC = () => {
                     
                     <div className="flex flex-col md:items-end">
                         <span className="text-gray-500 mb-1 uppercase text-xs tracking-wider">E-mail</span>
-                        <Link href="mailto:x1fitness@gmail.com" className="text-white hover:text-brand-red transition-colors">
-                            x1fitness@gmail.com
-                        </Link>
+                        <a href="mailto:hello@x1fitness.com" className="text-white hover:text-brand-red transition-colors">
+                            hello@x1fitness.com
+                        </a>
                     </div>
                 </div>
             </div>
