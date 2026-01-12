@@ -1,17 +1,18 @@
 import React from 'react';
 import ContactFooter from '../ContactFooter';
 import { Target, Shield, Users, Zap, Clock, Trophy } from 'lucide-react';
+import Image from '../Image';
 
 const About: React.FC = () => {
   return (
     <div className="pt-20 min-h-screen bg-brand-dark overflow-hidden relative">
       
       {/* --- GLOBAL AMBIENT RED SHADING --- */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="absolute inset-0 pointer-events-none z-0">
         {/* Top Right Red Glow */}
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(230,0,0,0.08)_0%,transparent_70%)] blur-[100px]"></div>
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(230,0,0,0.08)_0%,transparent_70%)] blur-[60px]"></div>
         {/* Bottom Left Red Glow */}
-        <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(230,0,0,0.06)_0%,transparent_70%)] blur-[120px]"></div>
+        <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(230,0,0,0.06)_0%,transparent_70%)] blur-[80px]"></div>
         {/* Center subtle pulse */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle,rgba(50,0,0,0.2)_0%,transparent_80%)]"></div>
       </div>
@@ -19,17 +20,19 @@ const About: React.FC = () => {
       {/* 1. Hero Section with Gritty Background */}
       <div className="relative h-[70vh] flex items-center justify-center overflow-hidden z-10">
         <div className="absolute inset-0 z-0">
-             <img 
+             <Image 
                 src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop" 
                 alt="Gym Background"
                 className="w-full h-full object-cover filter grayscale brightness-[0.4] contrast-125" 
+                loading="eager"
+                decoding="async"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
              <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_20%,#050505_120%)]"></div>
         </div>
         
         <div className="relative z-10 text-center max-w-5xl px-6 animate-fade-in-up">
-            <div className="inline-block mb-4 border border-brand-red/30 bg-brand-red/10 px-4 py-1 rounded-sm backdrop-blur-sm">
+            <div className="inline-block mb-4 border border-brand-red/30 bg-brand-red/10 px-4 py-1 rounded-sm">
                 <span className="text-brand-red font-bold tracking-[0.3em] uppercase text-xs md:text-sm">Identity & Ethos</span>
             </div>
             <h1 className="text-6xl md:text-9xl font-display font-bold uppercase text-white leading-none tracking-tighter mb-6 drop-shadow-2xl">
@@ -43,7 +46,7 @@ const About: React.FC = () => {
       </div>
 
       {/* 2. Manifesto / Origin - Split Layout */}
-      <div className="relative py-24 px-6 border-b border-white/5 bg-[#080808]/80 z-10 backdrop-blur-sm">
+      <div className="relative py-24 px-6 border-b border-white/5 bg-[#080808]/80 z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8 order-2 lg:order-1">
                 <h2 className="text-4xl md:text-6xl font-display font-bold text-white uppercase leading-[0.9]">
@@ -85,10 +88,14 @@ const About: React.FC = () => {
                 {/* Decorative Elements */}
                 <div className="absolute inset-0 border-2 border-brand-red translate-x-4 translate-y-4 rounded-sm opacity-50 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500"></div>
                 <div className="relative z-10 overflow-hidden rounded-sm">
-                    <img 
+                    <Image 
                         src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200" 
                         alt="Gym Interior"
                         className="w-full h-auto grayscale contrast-125 hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                        decoding="async"
+                        width="1200"
+                        height="800"
                     />
                     <div className="absolute inset-0 bg-brand-red/10 mix-blend-overlay"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
@@ -112,7 +119,7 @@ const About: React.FC = () => {
                     { icon: Shield, title: "Support", desc: "A supportive environment with separate timings for women, ensuring privacy, comfort, and confidence for all." },
                     { icon: Users, title: "Community", desc: "More than a gym, we are a family. We grow stronger together, fostering a culture of encouragement and respect." }
                 ].map((item, i) => (
-                    <div key={i} className="group bg-[#0a0a0a]/90 backdrop-blur-md border border-white/5 p-10 hover:border-brand-red/50 transition-all duration-500 relative overflow-hidden rounded-sm hover:-translate-y-2">
+                    <div key={i} className="group bg-[#0a0a0a]/90 border border-white/5 p-10 hover:border-brand-red/50 transition-all duration-500 relative overflow-hidden rounded-sm hover:-translate-y-2">
                         {/* Giant Icon Background */}
                         <div className="absolute -top-6 -right-6 p-4 opacity-5 group-hover:opacity-10 transition-opacity duration-500 rotate-12 group-hover:rotate-0">
                             <item.icon className="w-40 h-40" />
@@ -155,11 +162,14 @@ const About: React.FC = () => {
                 ].map((member, i) => (
                     <div key={i} className="group relative h-[450px] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-white/5 bg-[#0a0a0a]">
                         <div className="absolute inset-0 bg-brand-red/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay"></div>
-                        <img 
+                        <Image 
                             src={member.img} 
                             alt={member.name} 
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                             loading="lazy" 
+                            decoding="async"
+                            width="800"
+                            height="1000"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 z-20"></div>
                         <div className="absolute bottom-0 left-0 w-full p-6 z-30 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">

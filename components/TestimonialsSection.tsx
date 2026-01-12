@@ -1,39 +1,20 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
-import Image from './Image';
 
 const testimonials = [
   {
     id: 1,
-    name: "James T.",
-    location: "LA, USA",
-    quote: "I Love The Variety Of Workouts On Fit Fusion. Whether It's HIIT, Yoga, Or Strength Training, There's Always Something New To Try. The Progress Tracking Tools Keep Me Motivated!",
-    image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=2544&auto=format&fit=crop",
-    role: "Member"
+    name: "Saad Sheikh",
+    date: "a week ago",
+    quote: "One of the best gyms in the area. Modern equipment, clean space, and a motivating atmosphere. Highly recommended for anyone serious about fitness 🏋️",
+    rating: 5
   },
   {
     id: 2,
-    name: "Ryan Blaze",
-    location: "NYC, USA",
-    quote: "The intensity of the 1-on-1 coaching completely transformed my physique in 3 months. The community pushes you harder than you ever could alone.",
-    image: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1887&auto=format&fit=crop",
-    role: "Pro Athlete"
-  },
-  {
-    id: 3,
-    name: "Ethan Maxx",
-    location: "Miami, USA",
-    quote: "Competition prep is brutal, but the nutrition guidance here is precise. I stepped on stage in the best shape of my life.",
-    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=2070&auto=format&fit=crop",
-    role: "Bodybuilder"
-  },
-  {
-    id: 4,
-    name: "Sarah K.",
-    location: "London, UK",
-    quote: "I never thought I could lift heavy until I joined. The trainers focus on form first, then power. Now I'm stronger than I've ever been.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
-    role: "Crossfit Athlete"
+    name: "Hammad Aslam",
+    date: "2 weeks ago",
+    quote: "Well maintained gym and all equipments are avaliable. Highly recommended.",
+    rating: 5
   }
 ];
 
@@ -50,14 +31,8 @@ const TestimonialsSection: React.FC = () => {
 
   const current = testimonials[currentIndex];
 
-  const getVisibleThumbnails = () => {
-    const idx1 = (currentIndex + 1) % testimonials.length;
-    const idx2 = (currentIndex + 2) % testimonials.length;
-    return [testimonials[idx1], testimonials[idx2]];
-  };
-
   return (
-    <section className="relative w-full bg-black py-24 overflow-hidden">
+    <section className="relative w-full bg-black py-24 overflow-hidden border-t border-white/5">
       
       {/* --- BACKGROUND EFFECTS START --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -68,7 +43,7 @@ const TestimonialsSection: React.FC = () => {
         <div className="absolute top-0 left-1/2 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(230,0,0,0.1)_0%,transparent_70%)] -translate-x-1/2 -translate-y-1/2"></div>
         
         {/* 3. Marquee Background */}
-        <div className="absolute bottom-0 left-0 w-full opacity-10 select-none pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full opacity-5 select-none pointer-events-none">
              <div className="flex whitespace-nowrap animate-marquee-left will-change-transform">
                  <span className="text-[18vw] font-display font-black italic text-transparent px-10" style={{ WebkitTextStroke: '2px white' }}>
                     VICTORY • GLORY • LEGACY • 
@@ -82,125 +57,98 @@ const TestimonialsSection: React.FC = () => {
       {/* --- BACKGROUND EFFECTS END --- */}
 
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 md:mb-24">
+        <div className="text-center mb-16 md:mb-20">
           <h2 className="text-5xl md:text-7xl font-display font-bold uppercase tracking-tighter text-white leading-[1]">
-            Your Success <br />
-            Stories, <span className="text-brand-red">Our Inspiration</span>
+            Member <span className="text-brand-red">Reviews</span>
           </h2>
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto uppercase tracking-wider text-sm font-medium">
-            See How Our Customers Have Achieved Their Goals And Let Their Journeys Inspire Yours!
+            Real feedback from the X1Fitness community.
           </p>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:h-[600px] items-center">
+        {/* Text-Focused Carousel */}
+        <div className="relative max-w-4xl mx-auto">
             
-            {/* LEFT COLUMN: Main Active Testimonial */}
-            <div className="lg:col-span-7 h-[500px] lg:h-full relative flex items-end">
-                {/* Image Container */}
-                <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl lg:rounded-none lg:overflow-visible transition-opacity duration-500">
-                    <Image 
-                        key={current.id}
-                        src={current.image}
-                        alt={current.name}
-                        className="w-full h-full object-cover object-top lg:object-contain lg:object-left-bottom animate-fade-in"
-                        style={{ 
-                            maskImage: 'linear-gradient(to bottom, black 50%, transparent 100%)',
-                            WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)' 
-                        }}
-                        loading="lazy"
-                    />
-                     <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black lg:via-transparent lg:to-transparent opacity-80 lg:opacity-100" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            {/* Main Card */}
+            <div className="relative bg-[#0a0a0a] border border-white/10 p-8 md:p-16 rounded-sm md:rounded-2xl flex flex-col items-center text-center transition-all duration-300 hover:border-brand-red/30 group min-h-[400px] justify-center overflow-hidden">
+                
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 pointer-events-none"></div>
+                {/* Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,0,0,0.08),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                {/* Big Quote Icon */}
+                <div className="relative z-10 mb-8">
+                    <div className="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center text-brand-red shadow-[0_0_30px_rgba(230,0,0,0.2)]">
+                        <Quote className="w-8 h-8 fill-current" />
+                    </div>
                 </div>
 
-                {/* Floating Card - Removed backdrop blur */}
-                <div className="relative z-20 bg-[#111]/95 border border-white/10 p-8 rounded-2xl max-w-xl shadow-xl lg:ml-auto lg:mr-12 mb-8 lg:mb-20 group hover:border-brand-red/30 transition-colors duration-300 animate-slide-up">
-                    <div className="absolute -top-6 -left-6 bg-brand-red p-3 rounded-xl shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-300">
-                        <Quote className="w-6 h-6 text-white fill-white" />
-                    </div>
-                    <p className="text-xl md:text-2xl font-display font-medium leading-relaxed text-gray-200 italic mb-6">
+                {/* Review Text */}
+                <div key={currentIndex} className="relative z-10 animate-fade-in-up">
+                    <p className="text-2xl md:text-4xl font-display font-medium leading-tight text-white italic mb-10 max-w-3xl mx-auto">
                         "{current.quote}"
                     </p>
-                    <div className="flex items-center justify-between border-t border-white/10 pt-6">
-                        <div>
-                            <h4 className="text-xl font-bold text-white uppercase tracking-wide">
-                                – {current.name}
-                            </h4>
-                            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">{current.location}</span>
-                        </div>
-                        <div className="flex gap-1 text-brand-red">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="w-4 h-4 fill-current" />
-                            ))}
-                        </div>
+
+                    {/* Stars */}
+                    <div className="flex justify-center gap-2 text-brand-red mb-6">
+                        {[...Array(current.rating)].map((_, i) => (
+                            <Star key={i} className="w-6 h-6 fill-current" />
+                        ))}
+                    </div>
+
+                    {/* Author Info */}
+                    <div className="flex flex-col items-center gap-1">
+                        <h4 className="text-xl font-bold text-white uppercase tracking-widest">
+                            {current.name}
+                        </h4>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">
+                            {current.date}
+                        </span>
                     </div>
                 </div>
             </div>
 
-            {/* RIGHT COLUMN */}
-            <div className="lg:col-span-5 flex flex-col justify-center h-full pl-0 lg:pl-12">
-                
-                {/* Navigation Buttons */}
-                <div className="flex items-center gap-4 mb-10">
-                    <button 
-                        onClick={handlePrev}
-                        className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-brand-red hover:border-brand-red transition-all duration-300 group hover:scale-110 active:scale-95"
-                    >
-                        <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />
-                    </button>
-                    <button 
-                        onClick={handleNext}
-                        className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-brand-red hover:border-brand-red transition-all duration-300 group hover:scale-110 active:scale-95"
-                    >
-                        <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-                </div>
-
-                {/* Thumbnails */}
-                <div className="flex gap-6 overflow-visible">
-                    {getVisibleThumbnails().map((item) => (
-                        <div 
-                            key={item.id}
-                            className="relative w-32 md:w-40 h-[300px] md:h-[400px] rounded-[2rem] overflow-hidden cursor-pointer group flex-shrink-0 animate-fade-in-right"
-                            onClick={() => setCurrentIndex(testimonials.findIndex(t => t.id === item.id))}
-                        >
-                            <Image 
-                                src={item.image} 
-                                alt={item.name} 
-                                className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-110 group-hover:scale-100"
-                                loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-                            <div className="absolute bottom-6 right-1/2 translate-x-1/2 w-full flex flex-col items-center gap-2">
-                                <span 
-                                    className="text-2xl font-display font-bold text-gray-400 group-hover:text-brand-red transition-colors duration-300 uppercase tracking-widest whitespace-nowrap origin-center rotate-[-90deg] translate-y-[-50px]"
-                                >
-                                    {item.name}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            {/* Navigation Buttons (Floating on sides on Desktop, Bottom on Mobile) */}
+            <div className="flex justify-between w-full absolute top-1/2 -translate-y-1/2 pointer-events-none px-0 md:-px-24 max-md:static max-md:mt-8 max-md:justify-center max-md:gap-6">
+                 <button 
+                    onClick={handlePrev}
+                    className="w-14 h-14 rounded-full bg-black border border-white/20 flex items-center justify-center text-white hover:bg-brand-red hover:border-brand-red transition-all duration-300 group hover:scale-110 active:scale-95 pointer-events-auto md:-translate-x-20 shadow-lg"
+                    aria-label="Previous Review"
+                >
+                    <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />
+                </button>
+                <button 
+                    onClick={handleNext}
+                    className="w-14 h-14 rounded-full bg-black border border-white/20 flex items-center justify-center text-white hover:bg-brand-red hover:border-brand-red transition-all duration-300 group hover:scale-110 active:scale-95 pointer-events-auto md:translate-x-20 shadow-lg"
+                    aria-label="Next Review"
+                >
+                    <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
             </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-3 mt-12">
+                {testimonials.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            idx === currentIndex ? 'bg-brand-red w-8' : 'bg-white/20 hover:bg-white/40'
+                        }`}
+                        aria-label={`Go to review ${idx + 1}`}
+                    />
+                ))}
+            </div>
+
         </div>
       </div>
       <style>{`
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
+        @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
-        .animate-fade-in-right { animation: fadeInRight 0.5s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
       `}</style>
     </section>
   );

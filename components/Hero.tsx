@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import { Clock, Flame, Activity, Dumbbell } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingCard from './FloatingCard';
-import heroImage from '../assets/heroimage.png';
-import Image from './Image';
+import heroImage from "../assets/heroimage.png";
 
 // Using the hosted image URL since local assets are not available
+// const heroImage = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
 
 const Hero: React.FC = () => {
   const ref = useRef(null);
@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section id="home" ref={ref} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end md:justify-center bg-brand-dark contain-paint">
+    <section ref={ref} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end md:justify-center bg-brand-dark contain-paint">
       
       {/* 1. Background Marquee - Optimized & More Visible */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-30 select-none overflow-hidden">
@@ -52,13 +52,13 @@ const Hero: React.FC = () => {
         <div className="w-full h-full bg-[radial-gradient(circle,rgba(230,0,0,0.25)_0%,transparent_65%)]"></div>
       </motion.div>
       
-      {/* 3. Main Headline - PERFORMANCE FIX: Reduced blur radius of shadows for faster rendering */}
+      {/* 3. Main Headline - "Redefine" text is solid white */}
       <motion.div 
         style={{ y: textY, opacity }}
         className="absolute top-[12%] md:top-[18%] w-full flex flex-col items-center z-10 pointer-events-auto select-none px-4 will-change-transform transform-gpu"
       >
         <h1 className="font-display font-bold uppercase text-[18vw] md:text-[15vw] leading-[0.85] tracking-tighter text-center cursor-default w-full">
-          <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500" style={{ textShadow: '0 5px 15px rgba(0,0,0,0.5)' }}>
+          <span className="block text-white drop-shadow-lg">
             Redefine
           </span>
           <span className="block text-brand-red" style={{ textShadow: '0 0 20px rgba(230,0,0,0.4)' }}>
@@ -72,7 +72,7 @@ const Hero: React.FC = () => {
         style={{ y: imageY }}
         className="absolute bottom-0 z-20 h-[70vh] md:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
       >
-        <Image 
+        <img 
           src={heroImage}
           alt="Fitness trainer posing"
           loading="eager"
@@ -87,13 +87,13 @@ const Hero: React.FC = () => {
         />
       </motion.div>
 
-      {/* 5. Floating Info Cards */}
+      {/* 5. Floating Info Cards - Adjusted Mobile Positioning for iPhones */}
       <motion.div 
         style={{ y: imageY }}
         className="absolute inset-0 z-30 w-full h-full max-w-7xl mx-auto pointer-events-none"
       >
-        {/* Top Left */}
-        <div className="absolute top-[30%] left-[2%] md:left-[10%] lg:left-[15%] animate-float-slow will-change-transform">
+        {/* Top Left - Moved to left-2 for max space on small screens */}
+        <div className="absolute top-[28%] left-2 md:left-[10%] lg:left-[15%] animate-float-slow will-change-transform transform scale-[0.75] md:scale-100 origin-left">
             <FloatingCard 
                 icon={<Clock className="w-5 h-5" />} 
                 label="Status" 
@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Left */}
-        <div className="absolute bottom-[25%] md:bottom-[15%] left-[5%] md:left-[15%] lg:left-[20%] animate-float-delayed will-change-transform">
+        <div className="absolute bottom-[22%] md:bottom-[15%] left-2 md:left-[15%] lg:left-[20%] animate-float-delayed will-change-transform transform scale-[0.75] md:scale-100 origin-left">
             <FloatingCard 
                 icon={<Flame className="w-5 h-5" />} 
                 label="Avg Burn" 
@@ -110,8 +110,8 @@ const Hero: React.FC = () => {
             />
         </div>
 
-        {/* Top Right */}
-        <div className="absolute top-[30%] right-[2%] md:right-[10%] lg:right-[15%] animate-float-reverse will-change-transform">
+        {/* Top Right - Moved to right-2 for max space on small screens */}
+        <div className="absolute top-[28%] right-2 md:right-[10%] lg:right-[15%] animate-float-reverse will-change-transform transform scale-[0.75] md:scale-100 origin-right">
             <FloatingCard 
                 icon={<Activity className="w-5 h-5" />} 
                 label="Zone" 
@@ -120,63 +120,14 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Right */}
-        <div className="absolute bottom-[25%] md:bottom-[15%] right-[5%] md:right-[15%] lg:right-[20%] animate-float-slow will-change-transform">
+        <div className="absolute bottom-[22%] md:bottom-[15%] right-2 md:right-[15%] lg:right-[20%] animate-float-slow will-change-transform transform scale-[0.75] md:scale-100 origin-right">
             <FloatingCard 
                 icon={<Dumbbell className="w-5 h-5" />} 
-                label="Facility" 
-                value="PRO GYM" 
+                label="Equip" 
+                value="ELITE" 
             />
         </div>
       </motion.div>
-
-      {/* 6. Scroll Indicator */}
-      <motion.div 
-        style={{ opacity }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 animate-bounce will-change-transform"
-      >
-          <div className="w-[1px] h-12 bg-gradient-to-b from-brand-red to-transparent"></div>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-brand-red font-bold">Scroll</span>
-      </motion.div>
-
-      {/* CSS Styles for Animations */}
-      <style>{`
-        .text-outline-red {
-          -webkit-text-stroke: 2px #E60000;
-          color: transparent;
-        }
-        @keyframes marquee {
-          0% { transform: translate3d(0,0,0); }
-          100% { transform: translate3d(-50%,0,0); }
-        }
-        @keyframes marquee-reverse {
-          0% { transform: translate3d(-50%,0,0); }
-          100% { transform: translate3d(0,0,0); }
-        }
-        .animate-marquee-slow {
-          animation: marquee 40s linear infinite;
-        }
-        .animate-marquee-reverse-slow {
-          animation: marquee-reverse 45s linear infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-        .animate-float-slow {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float 7s ease-in-out infinite 1.5s;
-        }
-        .animate-float-reverse {
-          animation: float 8s ease-in-out infinite reverse;
-        }
-        /* Hardware acceleration helper */
-        .will-change-transform {
-          will-change: transform;
-          transform: translateZ(0);
-        }
-      `}</style>
     </section>
   );
 };

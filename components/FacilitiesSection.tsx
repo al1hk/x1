@@ -108,14 +108,14 @@ const FacilitiesSection: React.FC = () => {
                     }}
                 />
                 
-                {/* Overlay - Red active state */}
+                {/* Overlay - Significantly brighter by default */}
                 <div className={`
                     absolute inset-0 transition-colors duration-300
-                    ${isActive ? 'bg-brand-red/40' : 'bg-black/60 group-hover:bg-black/40'}
+                    ${isActive ? 'bg-brand-red/40' : 'bg-black/20 group-hover:bg-black/10'}
                 `}></div>
                 
-                {/* Dark Gradient for Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                {/* Dark Gradient for Text Readability - Reduced opacity */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
 
                 {/* Index Number */}
                 <div className="absolute top-6 left-6 z-10">
