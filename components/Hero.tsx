@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { Clock, Flame, Activity, Dumbbell, ChevronDown } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingCard from './FloatingCard';
+import heroImage from '../assets/heroimage.png';
 
 const Hero: React.FC = () => {
   const ref = useRef(null);
@@ -17,8 +18,6 @@ const Hero: React.FC = () => {
   const marqueeY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  // High-quality character image with fallback
-  const heroImage = "../assets/heroimage.png";
 
   return (
     <section 
