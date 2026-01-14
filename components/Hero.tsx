@@ -1,11 +1,8 @@
+
 import React, { useRef } from 'react';
-import { Clock, Flame, Activity, Dumbbell } from 'lucide-react';
+import { Clock, Flame, Activity, Dumbbell, ChevronDown } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingCard from './FloatingCard';
-import heroImage from "../assets/heroimage.png";
-
-// Using the hosted image URL since local assets are not available
-// const heroImage = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop";
 
 const Hero: React.FC = () => {
   const ref = useRef(null);
@@ -14,120 +11,149 @@ const Hero: React.FC = () => {
     offset: ["start start", "end start"]
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Parallax transformations
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const marqueeY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
+  // High-quality character image with fallback
+  const heroImage = "../assets/heroimage.png";
 
   return (
-    <section ref={ref} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end md:justify-center bg-brand-dark contain-paint">
+    <section 
+      ref={ref} 
+      className="relative w-full h-[100svh] overflow-hidden flex flex-col items-center justify-center bg-brand-dark contain-paint"
+    >
       
-      {/* 1. Background Marquee - Optimized & More Visible */}
-      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-30 select-none overflow-hidden">
-        <div className="absolute w-full rotate-[-5deg] scale-125 transform-gpu">
-             {/* CSS-based marquee for better performance */}
+      {/* 1. Background Layer: Marquee Text */}
+      <motion.div 
+        style={{ y: marqueeY }}
+        className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 select-none overflow-hidden"
+      >
+        <div className="absolute w-full rotate-[-8deg] scale-[1.3] md:scale-150 transform-gpu">
             <div className="flex whitespace-nowrap animate-marquee-slow will-change-transform">
-                <span className="text-[15vw] md:text-[12vw] font-display font-bold uppercase italic text-outline-red px-4">
-                    Obsession • Focus • Grit •
-                </span>
-                <span className="text-[15vw] md:text-[12vw] font-display font-bold uppercase italic text-outline-red px-4">
-                    Obsession • Focus • Grit •
-                </span>
+                {[1, 2].map((i) => (
+                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-outline-red px-8 md:px-12 leading-none">
+                        Titan • Strength • Power • Legacy •
+                    </span>
+                ))}
             </div>
-            <div className="flex whitespace-nowrap animate-marquee-reverse-slow mt-[-4vw] will-change-transform">
-                <span className="text-[15vw] md:text-[12vw] font-display font-bold uppercase italic text-transparent stroke-white px-4" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.4)' }}>
-                    Unstoppable • Relentless • Iron •
-                </span>
-                <span className="text-[15vw] md:text-[12vw] font-display font-bold uppercase italic text-transparent stroke-white px-4" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.4)' }}>
-                    Unstoppable • Relentless • Iron •
-                </span>
+            <div className="flex whitespace-nowrap animate-marquee-reverse-slow -mt-4 md:-mt-8 will-change-transform">
+                {[1, 2].map((i) => (
+                    <span key={i} className="text-[20vw] font-display font-black uppercase italic text-stroke-white px-8 md:px-12 leading-none">
+                        Relentless • Grit • Obsession •
+                    </span>
+                ))}
             </div>
         </div>
+      </motion.div>
+
+      {/* 2. Visual Layer: Glows & Vignette */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140vw] h-[140vw] bg-[radial-gradient(circle,rgba(230,0,0,0.12)_0%,transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40"></div>
       </div>
 
-      {/* 2. Central Red Glow - PERFORMANCE FIX: Removed mix-blend-screen */}
-      <motion.div 
-        style={{ scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]) }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full pointer-events-none z-0 will-change-transform transform-gpu"
-      >
-        <div className="w-full h-full bg-[radial-gradient(circle,rgba(230,0,0,0.25)_0%,transparent_65%)]"></div>
-      </motion.div>
-      
-      {/* 3. Main Headline - "Redefine" text is solid white */}
+      {/* 3. Mid-Layer: The Main Headline */}
       <motion.div 
         style={{ y: textY, opacity }}
-        className="absolute top-[12%] md:top-[18%] w-full flex flex-col items-center z-10 pointer-events-auto select-none px-4 will-change-transform transform-gpu"
+        className="relative z-20 w-full flex flex-col items-center pointer-events-none select-none px-4 -mt-[15vh] md:-mt-[20vh]"
       >
-        <h1 className="font-display font-bold uppercase text-[18vw] md:text-[15vw] leading-[0.85] tracking-tighter text-center cursor-default w-full">
-          <span className="block text-white drop-shadow-lg">
-            Redefine
-          </span>
-          <span className="block text-brand-red" style={{ textShadow: '0 0 20px rgba(230,0,0,0.4)' }}>
-            Your Limits
+        <h1 className="font-display font-bold uppercase text-[18vw] md:text-[14vw] lg:text-[12vw] leading-[0.8] tracking-tight text-center w-full flex flex-col items-center">
+          <div className="flex justify-center flex-wrap drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
+            {"REDEFINE".split("").map((char, i) => (
+              <span 
+                key={i} 
+                className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-red-600"
+                style={{ backgroundSize: '110% 100%', backgroundPosition: 'left center' }}
+              >
+                {char}
+              </span>
+            ))}
+          </div>
+          <span className="block bg-clip-text text-transparent bg-gradient-to-b from-red-500 via-brand-red to-red-900 relative" style={{ filter: 'drop-shadow(0 0 25px rgba(230,0,0,0.4))' }}>
+            YOUR LIMITS
           </span>
         </h1>
+        <p className="font-sans font-bold text-[8px] md:text-xs lg:text-sm tracking-[0.4em] md:tracking-[0.6em] text-white/40 uppercase mt-4 md:mt-8">
+            The Ultimate Performance Collective
+        </p>
       </motion.div>
 
-      {/* 4. Main Character Image - PERFORMANCE FIX: Removed drop-shadow from filter */}
+      {/* 4. Foreground Layer: Character Image */}
       <motion.div 
         style={{ y: imageY }}
-        className="absolute bottom-0 z-20 h-[70vh] md:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
+        className="absolute bottom-0 z-30 h-[65vh] md:h-[85vh] lg:h-[90vh] w-full max-w-6xl flex items-end justify-center pointer-events-none will-change-transform transform-gpu"
       >
         <img 
           src={heroImage}
-          alt="Fitness trainer posing"
+          alt="Elite Athlete"
           loading="eager"
           decoding="async"
-          className="h-full w-full object-contain object-bottom"
+          className="h-full w-auto object-contain object-bottom"
           style={{
-            filter: 'grayscale(100%) contrast(1.1) brightness(0.8)',
-            maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+            filter: 'grayscale(100%) contrast(1.1) brightness(0.9)',
+            maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
           }}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          onError={(e) => {
+            e.currentTarget.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200";
+          }}
         />
+        <div className="absolute inset-0 bg-brand-red/5 mix-blend-color pointer-events-none"></div>
       </motion.div>
 
-      {/* 5. Floating Info Cards - Adjusted Mobile Positioning for iPhones */}
+      {/* 5. UI Layer: Floating Info Cards - Optimized for Mobile Overlap */}
       <motion.div 
         style={{ y: imageY }}
-        className="absolute inset-0 z-30 w-full h-full max-w-7xl mx-auto pointer-events-none"
+        className="absolute inset-0 z-40 w-full h-full max-w-[1600px] mx-auto pointer-events-none"
       >
-        {/* Top Left - Moved to left-2 for max space on small screens */}
-        <div className="absolute top-[28%] left-2 md:left-[10%] lg:left-[15%] animate-float-slow will-change-transform transform scale-[0.75] md:scale-100 origin-left">
+        {/* TOP LEFT */}
+        <div className="absolute top-[15%] left-2 md:left-[8%] lg:left-[12%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
             <FloatingCard 
                 icon={<Clock className="w-5 h-5" />} 
-                label="Status" 
+                label="Accessibility" 
                 value="OPEN 24/7" 
             />
         </div>
 
-        {/* Bottom Left */}
-        <div className="absolute bottom-[22%] md:bottom-[15%] left-2 md:left-[15%] lg:left-[20%] animate-float-delayed will-change-transform transform scale-[0.75] md:scale-100 origin-left">
+        {/* BOTTOM LEFT - Pushed further left/bottom to avoid character */}
+        <div className="absolute bottom-[30%] left-2 md:left-[5%] lg:left-[10%] animate-float-delayed will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-left">
             <FloatingCard 
                 icon={<Flame className="w-5 h-5" />} 
-                label="Avg Burn" 
-                value="800 KCAL" 
+                label="Avg Session" 
+                value="950 KCAL" 
             />
         </div>
 
-        {/* Top Right - Moved to right-2 for max space on small screens */}
-        <div className="absolute top-[28%] right-2 md:right-[10%] lg:right-[15%] animate-float-reverse will-change-transform transform scale-[0.75] md:scale-100 origin-right">
+        {/* TOP RIGHT */}
+        <div className="absolute top-[15%] right-2 md:right-[8%] lg:right-[12%] animate-float-reverse will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
             <FloatingCard 
                 icon={<Activity className="w-5 h-5" />} 
-                label="Zone" 
-                value="HIIT" 
-            />
-        </div>
-
-        {/* Bottom Right */}
-        <div className="absolute bottom-[22%] md:bottom-[15%] right-2 md:right-[15%] lg:right-[20%] animate-float-slow will-change-transform transform scale-[0.75] md:scale-100 origin-right">
-            <FloatingCard 
-                icon={<Dumbbell className="w-5 h-5" />} 
-                label="Equip" 
+                label="Intensity" 
                 value="ELITE" 
             />
         </div>
+
+        {/* BOTTOM RIGHT - Pushed further right/bottom to avoid character */}
+        <div className="absolute bottom-[30%] right-2 md:right-[5%] lg:right-[10%] animate-float-slow will-change-transform transform scale-[0.65] xs:scale-[0.75] md:scale-100 origin-right">
+            <FloatingCard 
+                icon={<Dumbbell className="w-5 h-5" />} 
+                label="Equipment" 
+                value="HAMMER STRENGTH" 
+            />
+        </div>
       </motion.div>
+
+      {/* Bottom Scroll Indicator */}
+      <div className="absolute bottom-6 md:bottom-10 z-50 flex flex-col items-center gap-2 pointer-events-none opacity-60">
+        <div className="flex flex-col items-center text-white/20 gap-1 animate-bounce">
+            <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-[0.3em]">Scroll</span>
+            <ChevronDown className="w-4 h-4 text-brand-red" />
+        </div>
+        <div className="w-[1px] h-6 md:h-12 bg-gradient-to-b from-brand-red to-transparent"></div>
+      </div>
     </section>
   );
 };

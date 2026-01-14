@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Dumbbell, Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import Link from './Link';
+import logo from '../assets/logo.png';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,15 +49,19 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group cursor-pointer relative z-50">
             <div className="relative">
-                <Dumbbell 
-                  className={`text-brand-red w-8 h-8 transition-transform duration-500 ${isScrolled ? 'rotate-0' : 'rotate-[-45deg] group-hover:rotate-0'}`} 
-                  strokeWidth={3} 
+                <img
+                  src={logo}
+                  alt="X1 Fitness"
+                  className="w-9 h-9 object-contain transition-transform duration-500 group-hover:scale-105"
+                  loading="eager"
+                  decoding="async"
                 />
                 {/* Replaced blur with simple opacity glow */}
                 <div className="absolute inset-0 bg-brand-red opacity-0 group-hover:opacity-40 rounded-full transition-opacity duration-300"></div>
             </div>
-            <span className="text-2xl font-display font-bold tracking-wide italic text-white">
-              X1<span className="text-brand-red">FITNESS</span>
+            <span className="text-2xl font-brand font-bold tracking-wide italic">
+              <span className="text-brand-red">X1</span>
+              <span className="text-white">Fitness</span>
             </span>
           </Link>
 
@@ -66,7 +71,7 @@ const Navbar: React.FC = () => {
               <li key={link.name}>
                 <Link 
                   href={link.href} 
-                  className="relative text-xs uppercase tracking-[0.25em] text-gray-300 hover:text-white transition-colors duration-300 font-bold group py-2"
+                  className="relative font-brand text-xs uppercase tracking-[0.25em] text-gray-300 hover:text-white transition-colors duration-300 font-bold group py-2"
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-red transition-all duration-300 group-hover:w-full box-shadow-[0_0_10px_brand-red]"></span>
@@ -112,7 +117,7 @@ const Navbar: React.FC = () => {
               <Link 
                 href={link.href} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-5xl font-display font-bold uppercase italic text-transparent stroke-white hover:text-brand-red hover:stroke-transparent transition-all duration-300 flex items-center gap-4 group"
+                className="text-5xl font-brand font-bold uppercase italic text-transparent stroke-white hover:text-brand-red hover:stroke-transparent transition-all duration-300 flex items-center gap-4 group"
                 style={{ WebkitTextStroke: '1px white' }}
               >
                 {link.name}
@@ -123,7 +128,7 @@ const Navbar: React.FC = () => {
         </ul>
         
         <div className={`mt-16 transition-all duration-700 delay-500 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="bg-brand-red text-white px-12 py-5 rounded-sm font-display font-bold text-2xl uppercase tracking-wider skew-x-[-10deg] shadow-[0_0_30px_rgba(230,0,0,0.4)] block text-center">
+            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="bg-brand-red text-white px-12 py-5 rounded-sm font-brand font-bold text-2xl uppercase tracking-wider skew-x-[-10deg] shadow-[0_0_30px_rgba(230,0,0,0.4)] block text-center">
                 Start Free Trial
             </Link>
         </div>

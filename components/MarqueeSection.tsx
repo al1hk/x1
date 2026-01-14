@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Dumbbell } from 'lucide-react';
 
@@ -29,7 +30,7 @@ const MarqueeSection: React.FC = () => {
                 </div>
             ))}
         </div>
-        {/* Duplicate for seamless loop if needed, though CSS marquee trick usually involves two identical divs or one long one */}
+        {/* Mirror for seamless loop */}
         <div className="flex whitespace-nowrap animate-marquee-infinite will-change-transform absolute top-0 left-0 translate-x-[100%]">
              {content.map((text, i) => (
                 <div key={`dup-${i}`} className="flex items-center mx-4 md:mx-8">
@@ -53,12 +54,13 @@ const MarqueeSection: React.FC = () => {
           100% { transform: translateX(-100%); }
         }
         .animate-marquee-infinite {
-          animation: marquee-infinite 30s linear infinite;
+          /* Slowed significantly for elite readability and brand feel */
+          animation: marquee-infinite 80s linear infinite;
         }
-        /* Mobile optimization */
+        /* Mobile adjustment for balanced speed */
         @media (max-width: 768px) {
             .animate-marquee-infinite {
-                animation-duration: 15s;
+                animation-duration: 50s;
             }
         }
         .will-change-transform {

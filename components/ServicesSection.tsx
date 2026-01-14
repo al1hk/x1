@@ -52,7 +52,7 @@ const ServiceCard: React.FC<{ service: typeof services[0] }> = ({ service }) => 
                 width="600"
                 height="450"
             />
-            <div className="absolute inset-0 bg-brand-red mix-blend-multiply opacity-0 group-hover:opacity-90 transition-opacity duration-500 ease-out" />
+            <div className="absolute inset-0 bg-brand-red mix-blend-multiply opacity-0 group-hover:opacity-30 transition-opacity duration-500 ease-out" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
         </div>
 
@@ -87,48 +87,151 @@ const ServiceCard: React.FC<{ service: typeof services[0] }> = ({ service }) => 
   );
 };
 
-const ServicesSection: React.FC = () => {
+const ServiceRow: React.FC<{ service: typeof services[0] }> = ({ service }) => {
   return (
-    <section id="services" className="relative w-full py-24 bg-[#050505] overflow-hidden border-t border-white/5">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]/90 hover:border-brand-red/50 transition-colors">
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(230,0,0,0.18),transparent_55%)]"></div>
+      </div>
+      <div className="relative z-10 flex flex-col md:flex-row gap-6 p-6 md:p-8">
+        <div className="relative w-full md:w-[220px] h-[140px] rounded-xl overflow-hidden border border-white/10">
+          <Image
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover filter grayscale brightness-75 contrast-125 group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            decoding="async"
+            width="440"
+            height="280"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-transparent to-transparent"></div>
+          <div className="absolute top-3 left-3 w-10 h-10 flex items-center justify-center rounded-lg bg-brand-red/90 border border-brand-red text-black">
+            <service.icon className="w-5 h-5" />
+          </div>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-between min-w-0">
+          <div>
+            <div className="flex items-start justify-between gap-6">
+              <h3 className="text-3xl font-display font-bold uppercase text-white tracking-wide">
+                {service.title}
+              </h3>
+              <span className="shrink-0 text-brand-red font-bold uppercase tracking-wider text-xs">
+                {service.price}
+              </span>
+            </div>
+            <p className="mt-4 text-gray-400 leading-relaxed font-medium text-sm">
+              {service.description}
+            </p>
+          </div>
+
+          <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+            <span className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold">
+              Engage
+            </span>
+            <ArrowUpRight className="w-5 h-5 text-brand-red" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+type ServicesSectionProps = {
+  variant?: 'landing' | 'services';
+};
+
+const ServicesSection: React.FC<ServicesSectionProps> = ({ variant = 'landing' }) => {
+  const isServicesVariant = variant === 'services';
+
+  return (
+    <section
+      id="services"
+      className={`relative w-full py-24 overflow-hidden border-t border-white/5 ${
+        isServicesVariant ? 'bg-[#060606]' : 'bg-[#050505]'
+      }`}
+    >
       
       {/* --- BACKGROUND EFFECTS START --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* 1. Consistent Red Tint Background */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-brand-tint via-[#050505] to-brand-tint opacity-100"></div>
-
-        {/* 2. Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
-
-        {/* 3. Ambient Red Orbs */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-red/5 rounded-full blur-[120px]"></div>
-
-        {/* 4. Marquee Background */}
-        <div className="absolute top-0 right-0 w-full opacity-10 rotate-[5deg] scale-110 pointer-events-none">
-             <div className="flex whitespace-nowrap animate-marquee-left will-change-transform">
-                 <span className="text-[20vw] font-display font-black italic text-transparent px-10" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
-                    TACTICAL • TRAINING • WARFARE • 
-                 </span>
-                 <span className="text-[20vw] font-display font-black italic text-transparent px-10" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
-                    TACTICAL • TRAINING • WARFARE • 
-                 </span>
-             </div>
-        </div>
+        {isServicesVariant ? (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0b0b0b] via-[#050505] to-brand-tint opacity-100"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,0,0,0.10),transparent_62%)]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:1px_7px] opacity-20"></div>
+            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[90vw] h-[90vw] bg-brand-red/10 rounded-full blur-[160px]"></div>
+            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-red/35 to-transparent"></div>
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-tr from-brand-tint via-[#050505] to-brand-tint opacity-100"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-brand-red/5 rounded-full blur-[120px]"></div>
+            <div className="absolute top-0 right-0 w-full opacity-10 rotate-[5deg] scale-110 pointer-events-none">
+              <div className="flex whitespace-nowrap animate-marquee-left will-change-transform">
+                <span
+                  className="text-[20vw] font-display font-black italic text-transparent px-10"
+                  style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}
+                >
+                  TACTICAL • TRAINING • WARFARE •
+                </span>
+                <span
+                  className="text-[20vw] font-display font-black italic text-transparent px-10"
+                  style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}
+                >
+                  TACTICAL • TRAINING • WARFARE •
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       {/* --- BACKGROUND EFFECTS END --- */}
 
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-        <div className="mb-16 flex flex-col items-start gap-2">
+        {isServicesVariant ? (
+          <div className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+            <div className="lg:col-span-8">
+              <span className="inline-flex items-center px-4 py-2 rounded-full border border-brand-red/30 text-brand-red font-bold tracking-[0.2em] uppercase text-xs">
+                Our Arsenal
+              </span>
+              <h2 className="mt-6 text-5xl md:text-7xl font-display font-bold text-white uppercase leading-[0.9]">
+                Choose Your{' '}
+                <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>
+                  Weapon
+                </span>
+              </h2>
+            </div>
+            <div className="lg:col-span-4">
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+              <div className="mt-4 h-px w-2/3 bg-gradient-to-r from-brand-red/70 to-transparent"></div>
+            </div>
+          </div>
+        ) : (
+          <div className="mb-16 flex flex-col items-start gap-2">
             <span className="text-brand-red font-bold tracking-[0.2em] uppercase text-sm">Our Arsenal</span>
             <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase">
-              Choose Your <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>Weapon</span>
+              Choose Your{' '}
+              <span className="text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>
+                Weapon
+              </span>
             </h2>
-        </div>
+          </div>
+        )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
+        {isServicesVariant ? (
+          <div className="space-y-6">
+            {services.map((service) => (
+              <ServiceRow key={service.id} service={service} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

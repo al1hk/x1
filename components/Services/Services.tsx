@@ -31,7 +31,7 @@ const Services: React.FC = () => {
       {/* 2. Services Grid (Reused) */}
       <div className="bg-[#080808] relative">
         <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <ServicesSection />
+        <ServicesSection variant="services" />
       </div>
 
       {/* 3. The Protocol (Replaced Plans Section) */}

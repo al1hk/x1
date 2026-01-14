@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;500;600;700&family=Oswald:wght@400;500;700&display=block" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -15,6 +15,7 @@
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               display: ['Oswald', 'sans-serif'],
+              brand: ['Josefin Sans', 'sans-serif'],
             },
             colors: {
               brand: {
@@ -75,6 +76,10 @@
       }
       h1, h2, h3, h4, h5, h6, .font-display {
         font-family: 'Oswald', sans-serif;
+      }
+
+      .font-brand {
+        font-family: 'Josefin Sans', sans-serif;
       }
 
       /* GPU Acceleration Utilities to Reduce Lag */
