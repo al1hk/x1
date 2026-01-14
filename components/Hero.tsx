@@ -97,9 +97,7 @@ const Hero: React.FC = () => {
             maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
           }}
-          onError={(e) => {
-            e.currentTarget.src = "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200";
-          }}
+          
         />
         <div className="absolute inset-0 bg-brand-red/5 mix-blend-color pointer-events-none"></div>
       </motion.div>
